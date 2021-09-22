@@ -1,0 +1,6 @@
+pytest~=6.2.5
+requests~=2.26.0
+
+Faker~=8.13.2
+attrs~=21.2.0
+
