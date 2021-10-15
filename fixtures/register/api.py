@@ -4,6 +4,7 @@ from fixtures.register.model import RegisterUser
 from fixtures.validator import Validator
 from common.deco import logging as log
 
+
 class Register(Validator):
     def __init__(self, app):
         self.app = app

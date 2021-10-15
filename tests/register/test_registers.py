@@ -13,7 +13,3 @@ class TestRegisterUser:
         res = app.register.register(data=data, type_response=RegisterUserResponse)
         assert res.status_code == 201
         assert res.data.message == ResponseText.MESSAGE_REGISTER_USER
-
-
-
-

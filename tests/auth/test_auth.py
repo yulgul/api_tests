@@ -1,5 +1,5 @@
 from fixtures.constants import ResponseText
-from fixtures.login.model import LoginUser, LoginUserResponse
+from fixtures.login.model import LoginUserResponse
 from fixtures.register.model import RegisterUser, RegisterUserResponse
 
 

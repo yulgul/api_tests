@@ -5,6 +5,7 @@ from fixtures.base import BaseClass
 
 fake = Faker()
 
+
 @attr.s
 class LoginUser(BaseClass):
     username: str = attr.ib(default=None)
@@ -13,6 +14,7 @@ class LoginUser(BaseClass):
     @staticmethod
     def random():
         return LoginUser(username=fake.email(), password=fake.password())
+
 
 @attr.s
 class LoginUserResponse:

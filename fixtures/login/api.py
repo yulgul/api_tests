@@ -4,6 +4,7 @@ from fixtures.login.model import LoginUser
 from fixtures.validator import Validator
 from common.deco import logging as log
 
+
 class Auth(Validator):
     def __init__(self, app):
         self.app = app

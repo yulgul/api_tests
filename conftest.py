@@ -8,6 +8,7 @@ def app(request):
     url = request.config.getoption("--api-url")
     return StoreApp(url)
 
+
 def pytest_addoption(parser):
     parser.addoption(
         "--api-url",
