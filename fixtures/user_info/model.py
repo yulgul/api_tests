@@ -34,3 +34,15 @@ class AddUserInfo(BaseClass):
 @attr.s
 class AddUserInfoResponse:
     message: str = attr.ib()
+
+
+@attr.s
+class GetUserInfoResponse:
+    phone: str = attr.ib(default=None)
+    email: str = attr.ib(default=None)
+    address: Address = attr.ib(default=None)
+
+
+@attr.s
+class DeleteUserInfoResponse:
+    message: str = attr.ib()
