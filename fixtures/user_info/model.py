@@ -46,3 +46,8 @@ class GetUserInfoResponse:
 @attr.s
 class DeleteUserInfoResponse:
     message: str = attr.ib()
+
+
+@attr.s
+class PutUserInfoResponse:
+    message: str = attr.ib()

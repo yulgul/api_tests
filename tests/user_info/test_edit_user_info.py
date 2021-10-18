@@ -1,14 +1,15 @@
-from fixtures.constants import ResponseText
+import pytest
 
+from fixtures.constants import ResponseText
 from fixtures.user_info.model import (
-    GetUserInfoResponse,
     AddUserInfo,
     AddUserInfoResponse,
+    PutUserInfoResponse,
 )
 
 
-class TestGetUserInfo:
-    def test_get_user_info_with_valid_data(self, app, auth_user):
+class TestPutUserInfo:
+    def test_edit_user_info_with_valid_data(self, app, auth_user):
         """
         1. Try to register user with valid data
         2. Check that status code is 201
@@ -23,22 +24,25 @@ class TestGetUserInfo:
         )
         assert res.status_code == 200
         assert res.data.message == ResponseText.MESSAGE_ADD_USER_INFO
-        res = app.userinfo.get_user_info(
+        data = AddUserInfo.random()
+        res = app.userinfo.edit_user_info(
             user_id=auth_user.uuid,
+            data=data,
             header=auth_user.header,
-            type_response=GetUserInfoResponse,
+            type_response=PutUserInfoResponse,
         )
         assert res.status_code == 200
+        assert res.data.message == ResponseText.MESSAGE_UPDATE_USER_INFO
 
-    def test_get_created_user_info_with_valid_data(self, app, auth_user_uuid_19):
-        """
-        1. Try to register user with valid data
-        2. Check that status code is 201
-        3. Check response
-        #"""
-        res = app.userinfo.get_user_info(
+    @pytest.mark.parametrize("field", ["phone", "email"])
+    def test_edit_user_with_empty_one_field(self, app, auth_user_uuid_19, field):
+        data = AddUserInfo.random()
+        setattr(data, field, None)
+        res = app.userinfo.edit_user_info(
             user_id=auth_user_uuid_19.uuid,
+            data=data,
             header=auth_user_uuid_19.header,
-            type_response=GetUserInfoResponse,
+            type_response=PutUserInfoResponse,
         )
         assert res.status_code == 200
+        assert res.data.message == ResponseText.MESSAGE_UPDATE_USER_INFO

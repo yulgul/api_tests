@@ -1,5 +1,7 @@
+import pytest
+
 from fixtures.constants import ResponseText
-from fixtures.login.model import LoginUserResponse
+from fixtures.login.model import LoginUserResponse, LoginUser
 from fixtures.register.model import RegisterUser, RegisterUserResponse
 
 
@@ -16,3 +18,13 @@ class TestAuthUser:
         assert res.data.message == ResponseText.MESSAGE_REGISTER_USER
         res = app.login.login(data=data, type_response=LoginUserResponse)
         assert res.status_code == 200
+
+    def test_auth_created_user(self, app, auth_user_uuid_19):
+        pass
+
+    @pytest.mark.parametrize("field", ["username", "password"])
+    def test_auth_invalid_data(self, app, field):
+        data = LoginUser(username="kkelly@baldwin.com", password="%aP4ODss!x")
+        setattr(data, field, None)
+        res = app.login.login(data=data, type_response=None)
+        assert res.status_code == 401
